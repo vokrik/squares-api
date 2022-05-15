@@ -1,6 +1,9 @@
 const puppeteer = require('puppeteer');
 const express = require('express');
 var cors = require('cors')
+process.on('unhandledRejection', error => {
+  process.exit(1)
+});
 
 const app = express()
 app.use(cors())
@@ -37,7 +40,7 @@ const browser = await puppeteer.launch({  ...(process.env.IS_DOCKER && {executab
     const page = await browser.newPage();
     await page.goto(`https://veloviewer.com/athlete/${id}`);
     console.log('parsing...')
-    await page.waitForSelector('#explorerDD', { timeout: 1000 });
+    await page.waitForSelector('#explorerDD', { timeout: 5000 });
 
     const div = await page.evaluate(() => {
       return document.querySelector('#explorerDD').innerHTML;
