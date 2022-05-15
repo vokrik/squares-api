@@ -4,7 +4,7 @@ var cors = require('cors')
 
 const app = express()
 app.use(cors())
-const port = 3000
+const port = 8080
 
 const players = [
       {
@@ -22,11 +22,16 @@ const players = [
           id: 22199054,
           name: "Adam",
           handicap: 18,
-      }
+      },
+      {
+        id: 25000090,
+        name: "Teri",
+        handicap: 20,
+    }
   ]
 
 async function fetchData() {
-const browser = await puppeteer.launch();
+const browser = await puppeteer.launch({ args: [ '--disable-gpu', '--disable-setuid-sandbox', '--no-sandbox', '--no-zygote' ] });
 
   async function fetchForPlayer(id) {
     const page = await browser.newPage();
