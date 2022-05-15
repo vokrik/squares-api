@@ -6,4 +6,5 @@ RUN apk add bash
 RUN npm install
 COPY . .
 EXPOSE 8080
+ENV IS_DOCKER=true
 CMD [ "./node_modules/.bin/pm2-runtime", "start", "index.js" ]

@@ -31,7 +31,7 @@ const players = [
   ]
 
 async function fetchData() {
-const browser = await puppeteer.launch({ args: [ '--disable-gpu', '--disable-setuid-sandbox', '--no-sandbox', '--no-zygote' ] });
+const browser = await puppeteer.launch({  ...(process.env.IS_DOCKER && {executablePath: '/usr/bin/chromium-browser'}), args: [ '--disable-gpu', '--disable-setuid-sandbox', '--no-sandbox', '--no-zygote' ] });
 
   async function fetchForPlayer(id) {
     const page = await browser.newPage();
